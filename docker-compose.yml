@@ -1,10 +1,12 @@
 services:
   yui_r:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: yui_r_bot
     restart: unless-stopped
-    environment:
-      - PYTHONUNBUFFERED=1
+    env_file:
+      - .env
     volumes:
-      - .:/app
-    command: python main.py
+      # Монтируем файл настроек, чтобы он сохранялся между перезапусками
+      - ./settings.json:/app/settings.json
