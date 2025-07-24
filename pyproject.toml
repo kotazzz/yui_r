@@ -1,0 +1,7 @@
+[project]
+name = "yui-r"
+version = "0.1.0"
+description = "A Discord bot for managing server activities and automating moderation tasks"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = []
