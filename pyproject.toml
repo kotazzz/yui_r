@@ -4,4 +4,7 @@ version = "0.1.0"
 description = "A Discord bot for managing server activities and automating moderation tasks"
 readme = "README.md"
 requires-python = ">=3.12"
-dependencies = []
+dependencies = [
+    "disnake>=2.10.1",
+    "dotenv>=0.9.9",
+]

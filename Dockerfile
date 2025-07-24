@@ -4,13 +4,18 @@ FROM python:3.12-slim
 # Устанавливаем рабочую директорию
 WORKDIR /app
 
-# Копируем файлы проекта
-COPY . /app
+# Устанавливаем uv, чтобы управлять зависимостями
+RUN pip install uv
 
-# Устанавливаем зависимости
-RUN pip install --no-cache-dir -r requirements.txt || pip install --no-cache-dir -r pyproject.toml
+# Копируем pyproject.toml для установки зависимостей
+# Это позволяет кэшировать этот слой, если зависимости не менялись
+COPY pyproject.toml ./
+RUN uv pip install --system --no-cache .
 
-# Указываем переменную окружения для запуска в контейнере
+# Копируем остальной код приложения
+COPY . .
+
+# Указываем переменную окружения для вывода логов в реальном времени
 ENV PYTHONUNBUFFERED=1
 
 # Запускаем приложение
